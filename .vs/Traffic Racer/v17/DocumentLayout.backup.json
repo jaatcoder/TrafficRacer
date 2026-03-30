@@ -1,0 +1,149 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\car\\Traffic Racer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|d:\\car\\traffic racer\\assets\\scrips\\destroyoncontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\destroyoncontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\trafficmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\trafficmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\lanemovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\lanemovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\cameracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\endlesscity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\endlesscity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\cammovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\cammovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|D:\\car\\Traffic Racer\\assets\\scrips\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D20DD2DD-E780-4E93-E251-02F49816484F}|Assembly-CSharp.csproj|solutionrelative:assets\\scrips\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DestroyOnContact.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\DestroyOnContact.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\DestroyOnContact.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\DestroyOnContact.cs",
+              "RelativeToolTip": "Assets\\Scrips\\DestroyOnContact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-22T18:45:26.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LaneMovement.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\LaneMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\LaneMovement.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\LaneMovement.cs",
+              "RelativeToolTip": "Assets\\Scrips\\LaneMovement.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-22T18:13:19.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TrafficManager.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\TrafficManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\TrafficManager.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\TrafficManager.cs",
+              "RelativeToolTip": "Assets\\Scrips\\TrafficManager.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBoAAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-22T17:33:06.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\Vehicle.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\Vehicle.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\Vehicle.cs",
+              "RelativeToolTip": "Assets\\Scrips\\Vehicle.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-21T16:24:46.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CamMovement.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CamMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\CamMovement.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CamMovement.cs",
+              "RelativeToolTip": "Assets\\Scrips\\CamMovement.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T16:09:52.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EndlessCity.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\EndlessCity.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\EndlessCity.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\EndlessCity.cs",
+              "RelativeToolTip": "Assets\\Scrips\\EndlessCity.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAmwBEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T14:19:47.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CarController.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CarController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\CarController.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CarController.cs",
+              "RelativeToolTip": "Assets\\Scrips\\CarController.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAAAGwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-05T14:35:49.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CameraController.cs",
+              "DocumentMoniker": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CameraController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scrips\\CameraController.cs",
+              "ToolTip": "D:\\car\\Traffic Racer\\Assets\\Scrips\\CameraController.cs",
+              "RelativeToolTip": "Assets\\Scrips\\CameraController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-07T15:37:48.939Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
