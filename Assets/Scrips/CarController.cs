@@ -19,6 +19,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private float motorForce = 100f;
     [SerializeField] private float steeringAngle = 30f;
     [SerializeField] private float breakForce = 1000f;
+    [SerializeField] UIManager uiManager;
 
     private Rigidbody rigidbody;
     private float horizontalInput;
@@ -104,5 +105,13 @@ public class CarController : MonoBehaviour
     {
         float speed = rigidbody.linearVelocity.magnitude * 2.23693629f;
         return speed;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="TrafficVehicle")
+        {
+            uiManager.GameOver(); 
+        }
+       
     }
 }
