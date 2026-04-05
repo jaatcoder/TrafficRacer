@@ -78,6 +78,10 @@ public class UIManager : MonoBehaviour
 
     public void TryAgain()
     {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayButtonSound();
+        }
         var currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
 

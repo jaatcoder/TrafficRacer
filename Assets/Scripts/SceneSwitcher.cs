@@ -41,6 +41,24 @@ public class NewMonoBehaviourScript : MonoBehaviour
         StartCoroutine(FadeOut(sceneName));
         
     }
+
+    public void SceneLoaderWithSound(string sceneName)
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayButtonSound();
+        }
+        StartCoroutine(FadeOut(sceneName));
+    }
+
+    public void QuitGameWithSound()
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayButtonSound();
+        }
+        Application.Quit();
+    }
     public void QuitGame()
     {
         Application.Quit();
