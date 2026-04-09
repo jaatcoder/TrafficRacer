@@ -143,6 +143,126 @@
 				"origin",
 				"HEAD:recovered-work-app"
 			]
+		},
+		{
+			"label": "git-log-3",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"log",
+				"-3",
+				"--oneline",
+				"--decorate"
+			]
+		},
+		{
+			"label": "git-main-check",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"git status -sb; echo '---'; git branch -vv; echo '---'; git rev-parse --short HEAD; git rev-parse --short main; git rev-parse --short recovered-work; echo '---'; git log --oneline --decorate -8 --graph --all"
+			]
+		},
+		{
+			"label": "git-branch-vv-nopager",
+			"type": "shell",
+			"command": "env",
+			"args": [
+				"GIT_PAGER=cat",
+				"git",
+				"branch",
+				"-vv"
+			]
+		},
+		{
+			"label": "git-divergence-count",
+			"type": "shell",
+			"command": "env",
+			"args": [
+				"GIT_PAGER=cat",
+				"git",
+				"rev-list",
+				"--left-right",
+				"--count",
+				"main...recovered-work"
+			]
+		},
+		{
+			"label": "git-heads-short",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"echo main=$(git rev-parse --short main); echo recovered-work=$(git rev-parse --short recovered-work); echo origin/main=$(git rev-parse --short origin/main); echo origin/recovered-work=$(git rev-parse --short origin/recovered-work)"
+			]
+		},
+		{
+			"label": "git-current-branch",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"branch",
+				"--show-current"
+			]
+		},
+		{
+			"label": "git-main-head-check",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"echo main=$(git rev-parse --short main); echo recovered-work=$(git rev-parse --short recovered-work); echo origin/main=$(git rev-parse --short origin/main)"
+			]
+		},
+		{
+			"label": "git-divergence-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"rev-list",
+				"--left-right",
+				"--count",
+				"main...recovered-work"
+			]
+		},
+		{
+			"label": "git-checkout-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"checkout",
+				"main"
+			]
+		},
+		{
+			"label": "git-merge-ff-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"merge",
+				"--ff-only",
+				"recovered-work"
+			]
+		},
+		{
+			"label": "git-push-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"main"
+			]
+		},
+		{
+			"label": "git-add-vscode-task",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"add",
+				".vscode/tasks.json"
+			]
 		}
 	]
 }
