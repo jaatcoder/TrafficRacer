@@ -263,6 +263,94 @@
 				"add",
 				".vscode/tasks.json"
 			]
+		},
+		{
+			"label": "git-commit-vscode-task",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"commit",
+				"-m",
+				"Update VS Code task definitions"
+			]
+		},
+		{
+			"label": "git-fetch-origin",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"fetch",
+				"origin"
+			]
+		},
+		{
+			"label": "git-divergence-rw-origin-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"rev-list",
+				"--left-right",
+				"--count",
+				"origin/main...recovered-work"
+			]
+		},
+		{
+			"label": "git-merge-origin-main-into-rw",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"merge",
+				"origin/main"
+			]
+		},
+		{
+			"label": "git-push-rw",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"recovered-work"
+			]
+		},
+		{
+			"label": "git-push-rw-to-main",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"recovered-work:main"
+			]
+		},
+		{
+			"label": "git-status-short-check",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
+		},
+		{
+			"label": "git-divergence-main-rw-again",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"rev-list",
+				"--left-right",
+				"--count",
+				"origin/main...recovered-work"
+			]
+		},
+		{
+			"label": "git-log-graph-short",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"env GIT_PAGER=cat git log --oneline --decorate --graph -8 --all"
+			]
 		}
 	]
 }
