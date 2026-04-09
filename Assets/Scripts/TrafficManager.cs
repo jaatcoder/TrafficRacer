@@ -37,4 +37,9 @@ public class TrafficManager : MonoBehaviour
 
         Instantiate(TrafficVehicle[RandomVehicleIndex], Lane[RandomLaneIndex].position, Quaternion.identity);
     }
+
+    public void ConfigurePlayer(CarController controller)
+    {
+        CarController = controller;
+    }
 }

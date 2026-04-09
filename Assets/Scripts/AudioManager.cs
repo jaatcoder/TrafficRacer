@@ -77,11 +77,25 @@ public class AudioManager : MonoBehaviour
     
     public void StopGameMusic()
     {
-        if(musicSource.isPlaying)
-        musicSource.Stop();
+        if (musicSource != null && musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
     }
     public void PlayMenuMusic()
     {
+        if (musicSource == null)
+        {
+            Debug.LogWarning("Music AudioSource is missing on AudioManager.");
+            return;
+        }
+
+        if (mainMenuMusic == null)
+        {
+            Debug.LogWarning("Main menu music clip is not assigned in AudioManager.");
+            return;
+        }
+
         if(musicSource.isPlaying&&musicSource.clip==mainMenuMusic)
         {
             return;
@@ -95,6 +109,18 @@ public class AudioManager : MonoBehaviour
     }
      public void PlayGameMusic()
     {
+        if (musicSource == null)
+        {
+            Debug.LogWarning("Music AudioSource is missing on AudioManager.");
+            return;
+        }
+
+        if (sampleSceneMusic == null)
+        {
+            Debug.LogWarning("Game music clip is not assigned in AudioManager.");
+            return;
+        }
+
         if(musicSource.isPlaying&&musicSource.clip==sampleSceneMusic)
         {
             return;
@@ -110,6 +136,13 @@ public class AudioManager : MonoBehaviour
     {
         if (uiSource == null)
         {
+            Debug.LogWarning("UI AudioSource is missing on AudioManager.");
+            return;
+        }
+
+        if (buttonSfx == null)
+        {
+            Debug.LogWarning("Button SFX clip is not assigned in AudioManager.");
             return;
         }
         uiSource.volume = 0.7f;

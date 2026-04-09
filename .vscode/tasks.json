@@ -1,0 +1,117 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "git-status-check",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--short"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "git-remote-check",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"remote",
+				"-v"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "git-branch-check",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"branch",
+				"--show-current"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "unity-cli-check",
+			"type": "shell",
+			"command": "/Applications/Unity/Hub/Editor/6000.3.9f1/Unity.app/Contents/MacOS/Unity",
+			"args": [
+				"-version"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "build-macos-app",
+			"type": "shell",
+			"command": "/Applications/Unity/Hub/Editor/6000.3.9f1/Unity.app/Contents/MacOS/Unity",
+			"args": [
+				"-batchmode",
+				"-quit",
+				"-projectPath",
+				".",
+				"-executeMethod",
+				"BuildScript.BuildMacOS",
+				"-logFile",
+				"Builds/macos-build.log"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "git-status-short",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--short"
+			]
+		},
+		{
+			"label": "git-add-all",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"add",
+				"-A"
+			]
+		},
+		{
+			"label": "git-add-build-app",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"add",
+				"-f",
+				"Builds/macOS/TrafficRacer.app"
+			]
+		},
+		{
+			"label": "git-status-staged",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"--short"
+			]
+		},
+		{
+			"label": "git-commit-release",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"commit",
+				"-m",
+				"Fix car selection/spawn pipeline and add macOS app build"
+			]
+		},
+		{
+			"label": "git-log-last",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"log",
+				"-1",
+				"--oneline"
+			]
+		}
+	]
+}

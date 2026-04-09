@@ -14,9 +14,19 @@ public class EndlessCity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerCarTransform == null || cityTransform == null)
+        {
+            return;
+        }
+
         if(playerCarTransform.position.z>transform.position.z + halfLength + 15f)
         {
             transform.position = new Vector3(0, 0, cityTransform.position.z + halfLength * 2 );
         }
+    }
+
+    public void SetTarget(Transform playerTransform)
+    {
+        playerCarTransform = playerTransform;
     }
 }

@@ -13,8 +13,18 @@ public class LaneMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (playerCarTransform == null)
+        {
+            return;
+        }
+
         Vector3 cameraPos = transform.position;
         cameraPos.z = playerCarTransform.position.z + offSet;
         transform.position = cameraPos;
+    }
+
+    public void SetTarget(Transform playerTransform)
+    {
+        playerCarTransform = playerTransform;
     }
 }

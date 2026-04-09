@@ -1,24 +1,29 @@
-# Unity folders
-Library/
-Temp/
-Logs/
-UserSettings/
-Build/
-Builds/
+# Unity generated folders (safe to ignore)
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
 
-# Unity auto-generated files
+# Unity build outputs
+[Bb]uild/
+[Bb]uilds/
+
+# Visual Studio / Rider generated solution files
 *.csproj
 *.sln
-*.unityproj
-*.user
+*.suo
 *.tmp
+*.user
+*.userprefs
 *.pidb
 *.booproj
+*.svd
 
-# IDE
-.vscode/
+# IDE/editor folders
+.vs/
 .idea/
 
-# OS
+# OS files
 .DS_Store
 Thumbs.db
