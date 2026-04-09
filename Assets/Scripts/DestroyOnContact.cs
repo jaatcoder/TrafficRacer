@@ -11,6 +11,27 @@ public class DestroyOnContact : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.transform.parent.gameObject);
+        if (other == null)
+        {
+            return;
+        }
+
+        GameObject target = other.transform.parent != null ? other.transform.parent.gameObject : other.gameObject;
+        if (target.CompareTag("Player"))
+        {
+            return;
+        }
+
+        bool isTrafficVehicle =
+            target.CompareTag("TrafficVehicle") ||
+            target.GetComponent<Vehicle>() != null ||
+            target.GetComponentInChildren<Vehicle>() != null;
+
+        if (!isTrafficVehicle)
+        {
+            return;
+        }
+
+        Destroy(target);
     }
 }

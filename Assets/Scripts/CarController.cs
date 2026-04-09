@@ -19,29 +19,45 @@ public class CarController : MonoBehaviour
     [SerializeField] private float motorForce = 100f;
     [SerializeField] private float steeringAngle = 30f;
     [SerializeField] private float breakForce = 1000f;
-    [SerializeField] UIManager uiManager;
+    [SerializeField] private float initialImpactIgnoreSeconds = 0.35f;
+    [SerializeField] private UIManager uiManager;
 
-    private Rigidbody rigidbody;
+    private Rigidbody carRigidbody;
     private float horizontalInput;
     private float verticalInput;
+    private bool hasGameOverTriggered;
+    private float spawnTime;
+
+    void OnEnable()
+    {
+        spawnTime = Time.time;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.centerOfMass = CarcenterOfMass.localPosition;
+        EnsureInitialized();
+
+        if (uiManager == null)
+        {
+            uiManager = FindAnyObjectByType<UIManager>();
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsReadyToDrive())
+        {
+            return;
+        }
+
         MotorForce();
         UpdateWheels();
         GetInput();
         Steering();
         ApplyBrakes();
         PowerSteering();
-        Debug.Log("Car Speed: " + CarSpeed() + " mph");
-
     }
     void GetInput()
     {
@@ -56,7 +72,7 @@ public class CarController : MonoBehaviour
             frontLeftWheelCollider.brakeTorque = breakForce;
             backRightWheelCollider.brakeTorque = breakForce;
             backLeftWheelCollider.brakeTorque = breakForce;
-            rigidbody.linearDamping = 1f;
+            carRigidbody.linearDamping = 1f;
         }
         else
         {
@@ -64,7 +80,7 @@ public class CarController : MonoBehaviour
             frontLeftWheelCollider.brakeTorque = 0f;
             backRightWheelCollider.brakeTorque = 0f;
             backLeftWheelCollider.brakeTorque = 0f;
-            rigidbody.linearDamping = 0f;
+            carRigidbody.linearDamping = 0f;
         }
     }
     void MotorForce()
@@ -94,6 +110,11 @@ public class CarController : MonoBehaviour
     
     void RotateWheel(WheelCollider wheelCollider, Transform transfrom)
     {
+        if (wheelCollider == null || transfrom == null)
+        {
+            return;
+        }
+
         Vector3 pos;
         Quaternion rot;
         wheelCollider.GetWorldPose(out pos, out rot);
@@ -103,16 +124,123 @@ public class CarController : MonoBehaviour
     }
     public float CarSpeed()
     {
-        float speed = rigidbody.linearVelocity.magnitude * 2.23693629f;
+        if (carRigidbody == null)
+        {
+            return 0f;
+        }
+
+        float speed = carRigidbody.linearVelocity.magnitude * 2.23693629f;
         return speed;
+    }
+
+    public void ConfigureRuntimeSetup(
+        WheelCollider frontRight,
+        WheelCollider frontLeft,
+        WheelCollider backRight,
+        WheelCollider backLeft,
+        Transform frontRightTransform,
+        Transform frontLeftTransform,
+        Transform backRightTransform,
+        Transform backLeftTransform,
+        Transform centerOfMassTransform)
+    {
+        frontRightWheelCollider = frontRight;
+        frontLeftWheelCollider = frontLeft;
+        backRightWheelCollider = backRight;
+        backLeftWheelCollider = backLeft;
+
+        frontRightWheelTransform = frontRightTransform;
+        frontLeftWheelTransform = frontLeftTransform;
+        backRightWheelTransform = backRightTransform;
+        backLeftWheelTransform = backLeftTransform;
+        CarcenterOfMass = centerOfMassTransform;
+
+        EnsureInitialized();
+    }
+
+    void EnsureInitialized()
+    {
+        if (carRigidbody == null)
+        {
+            carRigidbody = GetComponent<Rigidbody>();
+        }
+
+        if (carRigidbody != null && CarcenterOfMass != null)
+        {
+            carRigidbody.centerOfMass = CarcenterOfMass.localPosition;
+        }
+    }
+
+    bool IsReadyToDrive()
+    {
+        return frontRightWheelCollider != null &&
+               frontLeftWheelCollider != null &&
+               backRightWheelCollider != null &&
+               backLeftWheelCollider != null &&
+               frontRightWheelTransform != null &&
+               frontLeftWheelTransform != null &&
+               backRightWheelTransform != null &&
+               backLeftWheelTransform != null;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag=="TrafficVehicle")
+        HandleVehicleImpact(collision.collider);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        HandleVehicleImpact(other);
+    }
+
+    private void HandleVehicleImpact(Collider other)
+    {
+        if (hasGameOverTriggered || other == null)
+        {
+            return;
+        }
+
+        if (Time.time - spawnTime < initialImpactIgnoreSeconds)
+        {
+            return;
+        }
+
+        Transform otherRoot = other.transform.root;
+        if (otherRoot == transform.root)
+        {
+            return;
+        }
+
+        if (other.CompareTag("Player") || (otherRoot != null && otherRoot.CompareTag("Player")))
+        {
+            return;
+        }
+
+        bool isTrafficVehicle =
+            other.CompareTag("TrafficVehicle") ||
+            (otherRoot != null && otherRoot.CompareTag("TrafficVehicle")) ||
+            other.GetComponent<Vehicle>() != null ||
+            (otherRoot != null && otherRoot.GetComponent<Vehicle>() != null) ||
+            other.GetComponentInParent<Vehicle>() != null;
+
+        if (!isTrafficVehicle)
+        {
+            return;
+        }
+
+        hasGameOverTriggered = true;
+
+        if (AudioManager.instance != null)
         {
             AudioManager.instance.StopGameMusic();
-            uiManager.GameOver(); 
         }
-       
+
+        if (uiManager != null)
+        {
+            uiManager.GameOver();
+        }
+        else
+        {
+            Debug.LogError("UIManager reference is missing on CarController.");
+        }
     }
 }

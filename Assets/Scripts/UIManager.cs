@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI speedText;
@@ -37,29 +38,30 @@ public class UIManager : MonoBehaviour
         SpeedUI();
         DistanceUI();
         scoreUI();
+        MaximumSpeed();
     }
     void SpeedUI()
     {
         speed = carController.CarSpeed();
-        speedText.text = speed.ToString("0" + "km/h");
+        speedText.text = speed.ToString("0") + " km/h";
     }
     void DistanceUI()
     {
-        distance = carTransform.position.z/ 1000;
-        distanceText.text = distance.ToString("0.00" + "km");
+        distance = carTransform.position.z / 1000f;
+        distanceText.text = distance.ToString("0.00") + " km";
     }
     void scoreUI()
     {
-        score = distance * 6 *1000;
-        ScoreText.text = score.ToString("0" + "pts");
+        score = distance * 6 * 1000;
+        ScoreText.text = score.ToString("0") + " pts";
     }
     public void GameOver()
     {
         Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
-        totalScoreText.text = score.ToString("0"+"pts");
-        totalDistanceText.text = distance.ToString("0.00" + "km");
-        maximumSpeedText.text = speed.ToString("0" + "km/h");
+        totalScoreText.text = score.ToString("0") + " pts";
+        totalDistanceText.text = distance.ToString("0.00") + " km";
+        maximumSpeedText.text = maximumSpeed.ToString("0") + " km/h";
 
         speedIcon.SetActive(false);
         distanceIcon.SetActive(false);
@@ -69,11 +71,16 @@ public class UIManager : MonoBehaviour
     void MaximumSpeed()
     {
         float currentSpeed = carController.CarSpeed();
-        if(currentSpeed > maximumSpeed)
+        if (currentSpeed > maximumSpeed)
         {
             maximumSpeed = currentSpeed;
         }
-        maximumSpeedText.text = maximumSpeed.ToString("0"+"km/h");
+    }
+
+    public void ConfigurePlayer(CarController controller, Transform playerTransform)
+    {
+        carController = controller;
+        carTransform = playerTransform;
     }
 
     public void TryAgain()

@@ -5549,6 +5549,7 @@ MonoBehaviour:
   yourScoreRectransform: {fileID: 906498639}
   totalScoreRectransform: {fileID: 86036054}
   panelRectransform: {fileID: 1878841494}
+  scaleDuration: 0.3
 --- !u!1 &345351740
 GameObject:
   m_ObjectHideFlags: 0
@@ -16864,6 +16865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5a4e8c8829356429707fb42d63c674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  playerCarTransform: {fileID: 0}
+  fallbackOffset: {x: 0, y: 4.33, z: -5.5}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17903,6 +17906,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 94ee3851673bb4849aacdaff9058f9f6, type: 3}
       propertyPath: m_Name
       value: Maruti800
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 94ee3851673bb4849aacdaff9058f9f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 94ee3851673bb4849aacdaff9058f9f6, type: 3}
       propertyPath: m_TagString
@@ -28453,6 +28460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1611654121}
   - component: {fileID: 1611654120}
+  - component: {fileID: 1611654122}
   m_Layer: 0
   m_Name: TrafficManager
   m_TagString: Untagged
@@ -28507,6 +28515,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1611654122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611654119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8d10106f93e4831bc37d615b6e6bdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarSpawner
+  carsPrefabs:
+  - {fileID: 100100000, guid: 69950adbc0d2a4ed281170bddda4905f, type: 3}
+  - {fileID: 7494991706763726872, guid: 0d46a05e8defe481385c61835be61324, type: 3}
+  - {fileID: 8384252914156399726, guid: 6ef78e5d8fcaa40c190b1e98f9781183, type: 3}
+  carIds:
+  - maruti-800
+  - volkswagen
+  - pick-up-truck
+  explicitSpawnPoint: {fileID: 0}
 --- !u!1 &1617794943
 GameObject:
   m_ObjectHideFlags: 0

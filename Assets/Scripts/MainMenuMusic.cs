@@ -14,6 +14,13 @@ public class MainMenuMusic : MonoBehaviour
             localSource.playOnAwake = false;
             localSource.enabled = false;
         }
+
+        if (AudioManager.instance == null)
+        {
+            Debug.LogWarning("AudioManager instance not found in scene. Menu music could not start.");
+            return;
+        }
+
         AudioManager.instance.PlayMenuMusic();
     }
 

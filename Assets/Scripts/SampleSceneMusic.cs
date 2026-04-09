@@ -14,6 +14,13 @@ public class SampleSceneMusic : MonoBehaviour
             localSource.playOnAwake = false;
             localSource.enabled = false;
         }
+
+        if (AudioManager.instance == null)
+        {
+            Debug.LogWarning("AudioManager instance not found in scene. Game music could not start.");
+            return;
+        }
+
         AudioManager.instance.PlayGameMusic();
     }
 
