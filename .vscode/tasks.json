@@ -112,6 +112,37 @@
 				"-1",
 				"--oneline"
 			]
+		},
+		{
+			"label": "git-ls-remote-head",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"ls-remote",
+				"--heads",
+				"origin",
+				"recovered-work"
+			]
+		},
+		{
+			"label": "git-push-origin",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"recovered-work"
+			]
+		},
+		{
+			"label": "git-push-new-branch",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"push",
+				"origin",
+				"HEAD:recovered-work-app"
+			]
 		}
 	]
 }
