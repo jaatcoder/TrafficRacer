@@ -8,6 +8,9 @@ public class CarSpawner : MonoBehaviour
     [SerializeField] GameObject[] carsPrefabs;
     [SerializeField] string[] carIds;
     [SerializeField] Transform explicitSpawnPoint;
+    [SerializeField] AudioClip defaultEngineSound;
+    [SerializeField] AudioClip defaultBrakeSound;
+    [SerializeField] AudioClip defaultHitSound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +57,13 @@ public class CarSpawner : MonoBehaviour
             return;
         }
 
+        
+        string prefabName = string.IsNullOrEmpty(selectedPrefab.name) ? $"Unnamed_Index{selectedIndex}" : selectedPrefab.name;
+        if (string.IsNullOrEmpty(selectedPrefab.name))
+        {
+            Debug.LogWarning($"CarSpawner: Prefab at index {selectedIndex} has empty name. Using fallback: {prefabName}");
+        }
+
         CarController[] existingPlayers = FindObjectsByType<CarController>(FindObjectsSortMode.None);
         Vector3 spawnPosition = GetSpawnPosition(existingPlayers);
         Quaternion spawnRotation = GetSpawnRotation(existingPlayers);
@@ -61,8 +71,15 @@ public class CarSpawner : MonoBehaviour
         GameObject spawned = InstantiateCarObject(selectedPrefab, spawnPosition, spawnRotation);
         if (spawned == null)
         {
-            Debug.LogError($"CarSpawner failed to instantiate selected object '{selectedPrefab.name}' at index {selectedIndex}.");
+            Debug.LogError($"CarSpawner failed to instantiate selected object '{prefabName}' at index {selectedIndex}. Check if the prefab is valid.");
             return;
+        }
+        
+        // Rename spawned car if it has empty name
+        if (string.IsNullOrEmpty(spawned.name))
+        {
+            spawned.name = $"PlayerCar_{(selectedIndex == 0 ? "Maruti" : selectedIndex == 1 ? "Volkswagen" : "PickupTruck")}";
+            Debug.Log($"CarSpawner: Spawned car had empty name, renamed to '{spawned.name}'");
         }
 
         spawned.SetActive(true);
@@ -77,6 +94,7 @@ public class CarSpawner : MonoBehaviour
         }
 
         RemoveExistingPlayers(existingPlayers, spawnedPlayer);
+        EnsureCarSound(spawnedPlayer);
         RebindSystems(spawnedPlayer);
 
         Debug.Log($"CarSpawner spawned '{spawned.name}' using id='{selectedCarId}', name='{selectedCarName}', index={selectedIndex} at {spawnPosition}. runtimeSelection={CarSelectionState.HasSelection}");
@@ -268,22 +286,83 @@ public class CarSpawner : MonoBehaviour
         }
     }
 
+    void EnsureCarSound(CarController player)
+    {
+        if (player == null)
+        {
+            Debug.LogError("[CarSpawner] EnsureCarSound called with null CarController");
+            return;
+        }
+
+        CarSound carSound = player.GetComponent<CarSound>();
+        if (carSound == null)
+        {
+            carSound = player.GetComponentInParent<CarSound>();
+        }
+        if (carSound == null)
+        {
+            carSound = player.GetComponentInChildren<CarSound>();
+        }
+        if (carSound == null)
+        {
+            carSound = player.gameObject.AddComponent<CarSound>();
+            Debug.Log($"[CarSpawner] Added CarSound component to {player.gameObject.name}");
+        }
+
+        carSound.enabled = true;
+        
+        if (defaultEngineSound != null && defaultBrakeSound != null && defaultHitSound != null)
+        {
+            carSound.ConfigureClips(defaultEngineSound, defaultBrakeSound, defaultHitSound);
+            Debug.Log($"[CarSpawner] Configured clips for {player.gameObject.name}");
+        }
+        else
+        {
+            Debug.LogWarning($"[CarSpawner] Missing audio clips - engine:{(defaultEngineSound != null)}, brake:{(defaultBrakeSound != null)}, hit:{(defaultHitSound != null)}");
+        }
+    }
+
     GameObject InstantiateCarObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        Object spawnedObject = Instantiate((Object)prefab, position, rotation);
-        GameObject spawnedGameObject = spawnedObject as GameObject;
-        if (spawnedGameObject != null)
+        if (prefab == null)
         {
-            return spawnedGameObject;
+            Debug.LogError("[CarSpawner] InstantiateCarObject called with null prefab.");
+            return null;
         }
 
-        Component spawnedComponent = spawnedObject as Component;
-        if (spawnedComponent != null)
+        try
         {
-            return spawnedComponent.gameObject;
-        }
+            // Try standard instantiation
+            Object spawnedObject = Instantiate((Object)prefab, position, rotation);
+            
+            if (spawnedObject == null)
+            {
+                Debug.LogError($"[CarSpawner] Instantiate returned null for prefab '{prefab.name}'. This may indicate a corrupted prefab.");
+                return null;
+            }
 
-        return null;
+            GameObject spawnedGameObject = spawnedObject as GameObject;
+            if (spawnedGameObject != null)
+            {
+                Debug.Log($"[CarSpawner] Successfully instantiated GameObject: {spawnedGameObject.name}");
+                return spawnedGameObject;
+            }
+
+            Component spawnedComponent = spawnedObject as Component;
+            if (spawnedComponent != null)
+            {
+                Debug.Log($"[CarSpawner] Instantiated Component, returning its GameObject.");
+                return spawnedComponent.gameObject;
+            }
+
+            Debug.LogError($"[CarSpawner] Instantiate returned object of unexpected type: {spawnedObject.GetType().Name}");
+            return null;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[CarSpawner] Exception during Instantiate for '{prefab.name}': {ex.Message}\n{ex.StackTrace}");
+            return null;
+        }
     }
 
     CarController ResolveOrBuildPlayerController(GameObject spawned)

@@ -351,6 +351,55 @@
 				"-lc",
 				"env GIT_PAGER=cat git log --oneline --decorate --graph -8 --all"
 			]
+		},
+		{
+			"label": "git-status-after-merge",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"status",
+				"-sb"
+			]
+		},
+		{
+			"label": "git-divergence-after-merge",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"rev-list",
+				"--left-right",
+				"--count",
+				"origin/main...recovered-work"
+			]
+		},
+		{
+			"label": "git-heads-after-merge",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"echo rw=$(git rev-parse --short recovered-work); echo omain=$(git rev-parse --short origin/main); echo lmain=$(git rev-parse --short main)"
+			]
+		},
+		{
+			"label": "git-fastforward-local-main-ref",
+			"type": "shell",
+			"command": "git",
+			"args": [
+				"branch",
+				"-f",
+				"main",
+				"recovered-work"
+			]
+		},
+		{
+			"label": "git-final-main-verify",
+			"type": "shell",
+			"command": "sh",
+			"args": [
+				"-lc",
+				"echo current=$(git branch --show-current); echo local_main=$(git rev-parse --short main); echo remote_main=$(git rev-parse --short origin/main); echo recovered_work=$(git rev-parse --short recovered-work); git rev-list --left-right --count main...origin/main; git status -sb"
+			]
 		}
 	]
 }
