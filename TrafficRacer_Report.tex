@@ -1,0 +1,169 @@
+% TrafficRacer_Report.tex
+% Enhanced LaTeX report for the Traffic Racer Unity project
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{titling}
+\geometry{a4paper, margin=1in}
+
+% --- TikZ for Vertical Flowchart ---
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, shadows, positioning}
+\tikzset{
+  block/.style = {rectangle, rounded corners, draw=black, thick, fill=#1!20, minimum width=7.5cm, minimum height=9mm, text centered, drop shadow},
+  decision/.style = {diamond, draw=black, thick, fill=#1!20, aspect=2, text centered, inner sep=2pt, drop shadow},
+  arrow/.style = {thick, -{Stealth[length=6pt,width=6pt]}}
+}
+
+% Decorative header for sections
+\usepackage{sectsty}
+\sectionfont{\color{teal}}
+
+\title{\bfseries\Huge Traffic Racer\\ \Large Unity 3D Game Project Report}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+% --- Cover Page ---
+\begin{titlingpage}
+  \centering
+  \vspace*{2cm}
+  {\color{teal}\Huge \bfseries Traffic Racer}\\[1cm]
+  {\Large Unity 3D Endless Driving Game}\\[2cm]
+  {\large Prepared by: Your Name}\\[0.5cm]
+  {\large Date: \today}\\[3cm]
+  \begin{center}
+    \includegraphics[width=0.45\textwidth]{Assets/Resources/Logo.png}\\[0.5cm]
+    \textit{(Optional project logo — replace with your asset)}
+  \end{center}
+  \vfill
+  \end{titlingpage}
+
+\tableofcontents
+\newpage
+
+\section{Abstract}
+This document describes the architecture, key modules, and flow of the Traffic Racer game. It includes a vertical, decorative flowchart, implementation notes, and an appendix listing project scripts and assets to help writing a final report.
+
+\section{Design Goals}
+\begin{itemize}
+  \item Smooth, infinite city streaming to simulate an endless road.
+  \item Lightweight AI traffic with deterministic lane movement.
+  \item Responsive player controls and camera smoothing.
+  \item Clear state transitions (menu, gameplay, game-over) with audio feedback.
+\end{itemize}
+
+\section{Vertical Flowchart (System Architecture)}
+The diagram below shows the main states and the in-game loop vertically for clearer printing in reports.
+
+\begin{center}
+\begin{tikzpicture}[node distance=11mm, every node/.style={font=\small}]
+  \node (start) [block={cyan}] {Start Game};
+  \node (menu) [block={teal}, below=of start] {Main Menu \& UI};
+  \node (select) [block={orange}, below=of menu] {Car Selection};
+  \node (game) [block={violet}, below=of select, minimum height=14mm] {Main Gameplay Loop};
+
+  \node (endless) [block={gray!30}, below left=12mm and -8mm of game, text width=6.5cm] {Endless City Generation (\texttt{EndlessCity.cs})};
+  \node (traffic) [block={yellow!30}, below=of game, xshift=0cm, text width=6.5cm] {Traffic Spawner (\texttt{CarSpawner.cs} \& \texttt{TrafficManager.cs})};
+  \node (player) [block={green!30}, below right=12mm and -8mm of game, text width=6.5cm] {Player & Vehicle (\texttt{CarController.cs}, \texttt{LaneMovement.cs})};
+
+  \node (collision) [decision={red!30}, below=of traffic, yshift=-3mm] {Collision Detected?};
+  \node (gameover) [block={red!20}, below=of collision] {Game Over (UI, animation, score)};
+
+  % Connections
+  \draw[arrow] (start) -- (menu);
+  \draw[arrow] (menu) -- (select);
+  \draw[arrow] (select) -- (game);
+
+  \draw[arrow] (game.south) -- ++(0,-5mm) -| (endless.north);
+  \draw[arrow] (game.south) -- ++(0,-5mm) -- (traffic.north);
+  \draw[arrow] (game.south) -- ++(0,-5mm) -| (player.north);
+
+  \draw[arrow] (endless.south) -| (collision.west);
+  \draw[arrow] (player.south) -| (collision.east);
+  \draw[arrow] (traffic.south) -- (collision.north);
+
+  \draw[arrow] (collision) -- node[right]{Yes} (gameover);
+  \draw[arrow] (collision.east) -| ++(20mm,0) node[right]{No} |- (game.east);
+  \draw[arrow] (gameover.west) -| ++(-30mm,0) node[left]{Retry / Menu} |- (menu.west);
+\end{tikzpicture}
+\end{center}
+
+\section{Module-Level Descriptions}
+Below are concise descriptions of the primary scripts and their responsibilities. Use these in your report subsections and for code references.
+
+\subsection{Environment}
+\textbf{EndlessCity.cs} --- Manages instantiation and recycling of city blocks to create an illusion of an infinite world. Uses pooling where possible to limit allocations.
+
+\subsection{Traffic / AI}
+\textbf{CarSpawner.cs} --- Spawns AI vehicles at lane entry points, randomising prefab type and spawn timing based on difficulty.
+
+\textbf{TrafficManager.cs} --- Coordinates global traffic density and difficulty scaling as the player progresses.
+
+\subsection{Player 
+\& Controls}
+\textbf{CarController.cs} --- Reads input, applies forces/torques to the player vehicle, and clamps speed/steering.
+
+\textbf{LaneMovement.cs} --- Used by AI and optionally by player vehicles to snap to lane centers and perform lane changes smoothly.
+
+\subsection{Collision \& Feedback}
+\textbf{DestroyOnContact.cs} --- Triggered on collision to apply damage, spawn FX, and signal the game-over state.
+
+\subsection{UI \& Audio}
+\textbf{UIManager.cs} \& \textbf{GameOverPanelAnimation.cs} --- Manage HUD updates and animated transitions for game over.
+
+\textbf{AudioManager.cs} \& \textbf{CarSound.cs} --- Play background music and per-vehicle sound fx.
+
+\section{Design Improvements \& Aesthetics}
+To make the flowchart and report more professional:
+\begin{itemize}
+  \item Use consistent color palette and drop shadows in diagrams (already applied in the flowchart).
+  \item Replace placeholder logo with a high-resolution project logo in Assets/Resources/Logo.png.
+  \item Use code listings (\texttt{listings} package) if you want to embed important snippets (I can add that if required).
+  \item Export high-resolution diagrams (SVG/PDF) from TikZ for printing quality.
+\end{itemize}
+
+\section{Testing, Build \& Compilation Notes}
+Compile the LaTeX using `xelatex` or `pdflatex` (recommend `xelatex` if you use system fonts or non-ASCII symbols):
+\begin{verbatim}
+xelatex TrafficRacer_Report.tex
+xelatex TrafficRacer_Report.tex
+\end{verbatim}
+
+If you embed the project logo, run the commands in the project root where `TrafficRacer_Report.tex` is saved.
+
+\section{Appendix: Project Script Inventory}
+The following scripts are present in the project `Assets/Scripts` folder and are useful references for the report.
+\begin{itemize}
+  \item AudioManager.cs
+  \item CamMovement.cs
+  \item CameraController.cs
+  \item CarController.cs
+  \item CarSelection.cs
+  \item CarSelectionState.cs
+  \item CarSound.cs
+  \item CarSpawner.cs
+  \item DestroyOnContact.cs
+  \item EndlessCity.cs
+  \item GameOverPanelAnimation.cs
+  \item LaneMovement.cs
+  \item MainMenuMusic.cs
+  \item Rotate.cs
+  \item SceneSwitcher.cs
+  \item TrafficManager.cs
+  \item UIManager.cs
+  \item Vehicle.cs
+\end{itemize}
+
+\section{Next Steps (Optional)}
+\begin{itemize}
+  \item I can embed selected code snippets (add `\usepackage{listings}` and include important functions).
+  \item I can export the TikZ flowchart as a standalone PDF/SVG for inclusion in slides.
+  \item I can generate a shorter onen-page summary for academic submission.
+\end{itemize}
+
+\end{document}

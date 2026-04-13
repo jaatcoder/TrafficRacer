@@ -23,6 +23,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private UIManager uiManager;
 
     private Rigidbody carRigidbody;
+    private CarSound carSound;
     private float horizontalInput;
     private float verticalInput;
     private bool hasGameOverTriggered;
@@ -41,6 +42,19 @@ public class CarController : MonoBehaviour
         if (uiManager == null)
         {
             uiManager = FindAnyObjectByType<UIManager>();
+        }
+
+        if (carSound == null)
+        {
+            carSound = GetComponent<CarSound>();
+            if (carSound == null)
+            {
+                carSound = GetComponentInParent<CarSound>();
+            }
+            if (carSound == null)
+            {
+                carSound = GetComponentInChildren<CarSound>();
+            }
         }
     }
 
@@ -185,6 +199,7 @@ public class CarController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         HandleVehicleImpact(collision.collider);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -225,6 +240,28 @@ public class CarController : MonoBehaviour
         if (!isTrafficVehicle)
         {
             return;
+        }
+
+        if (carSound != null)
+        {
+            carSound.PlayHitSound();
+        }
+        else
+        {
+            carSound = GetComponent<CarSound>();
+            if (carSound == null)
+            {
+                carSound = GetComponentInParent<CarSound>();
+            }
+            if (carSound == null)
+            {
+                carSound = GetComponentInChildren<CarSound>();
+            }
+
+            if (carSound != null)
+            {
+                carSound.PlayHitSound();
+            }
         }
 
         hasGameOverTriggered = true;

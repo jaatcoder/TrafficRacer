@@ -28528,7 +28528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarSpawner
   carsPrefabs:
-  - {fileID: 100100000, guid: 69950adbc0d2a4ed281170bddda4905f, type: 3}
+  - {fileID: 9148670609831671751, guid: 69950adbc0d2a4ed281170bddda4905f, type: 3}
   - {fileID: 7494991706763726872, guid: 0d46a05e8defe481385c61835be61324, type: 3}
   - {fileID: 8384252914156399726, guid: 6ef78e5d8fcaa40c190b1e98f9781183, type: 3}
   carIds:
@@ -28536,6 +28536,9 @@ MonoBehaviour:
   - volkswagen
   - pick-up-truck
   explicitSpawnPoint: {fileID: 0}
+  defaultEngineSound: {fileID: 8300000, guid: 9a275871720d149e7b6090c5e6166fb0, type: 3}
+  defaultBrakeSound: {fileID: 8300000, guid: 2d31f8b4670614802bef63b1b420ac39, type: 3}
+  defaultHitSound: {fileID: 8300000, guid: 07a6e6b669f104ad1a33171063a6428d, type: 3}
 --- !u!1 &1617794943
 GameObject:
   m_ObjectHideFlags: 0

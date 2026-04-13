@@ -15,6 +15,24 @@ public class CarSelection : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Reset time scale in case it was paused by game over
+        Time.timeScale = 1f;
+        
+        // Ensure AudioListener is not paused and volume is normal
+        AudioListener.pause = false;
+        AudioListener.volume = 1f;
+        
+        // Play garage/menu music when returning to garage
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayMenuMusic();
+            Debug.Log("[CarSelection] Started - playing menu music");
+        }
+        else
+        {
+            Debug.LogWarning("[CarSelection] AudioManager instance not found - cannot play menu music");
+        }
+
         if (cars == null || cars.Length == 0)
         {
             return;
