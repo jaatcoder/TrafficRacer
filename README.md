@@ -1,70 +1,60 @@
-# Traffic Racer (Unity)
+# Traffic Racer
 
-A Unity traffic racer project with scene flow:
-MainMenu -> Garage -> SampleScene
+A Unity-based endless racing game where you control a car, avoid traffic, and score points based on distance and speed. The project is built with C# scripts targeting .NET Framework 4.7.1.
 
-## Unity Version
+## Features
 
-- Unity Editor: 6000.3.9f1
+- Realistic car physics and controls
+- Endless city environment
+- Dynamic traffic vehicles
+- Score, distance, and speed tracking UI
+- Game over and retry system
+- Audio feedback for engine, braking, and collisions
 
-## What To Commit To Git
+## Project Structure
 
-To let anyone clone and open this project in Unity, commit these folders/files:
+Key scripts in the project:
 
-- Assets/
-- Packages/
-- ProjectSettings/
-- Any docs (README, guides)
+- **CarController.cs**: Handles car movement, physics, input, and collision logic.
+- **UIManager.cs**: Manages UI updates for speed, distance, score, and game over state.
+- **CarSound.cs**: Controls car-related audio (engine, brake, collision).
+- **TrafficManager.cs**: Spawns and manages traffic vehicles.
+- **Vehicle.cs**: Base class for traffic vehicles.
+- **LaneMovement.cs**: Handles lane-based movement for vehicles.
+- **EndlessCity.cs**: Manages endless city environment spawning.
+- **CameraController.cs / CamMovement.cs**: Controls camera following and effects.
+- **DestroyOnContact.cs**: Handles object destruction on collision.
+- **AudioManager.cs**: (If present) Manages background music and sound effects.
+- **CarSpawn.cs**: (If present) Handles spawning of player or AI cars.
 
-Do not commit generated cache/build folders:
+> There are approximately 17 scripts in total, including audio, spawning, and utility scripts.
 
-- Library/
-- Temp/
-- Logs/
-- UserSettings/
-- obj/
-- Build/ or Builds/
+## Getting Started
 
-(These are already covered by .gitignore.)
+### Prerequisites
 
-## Open The Project (For Developers)
+- Unity 2021.3 LTS or newer (recommended)
+- TextMeshPro package (for UI)
+- .NET Framework 4.7.1 compatibility
 
-1. Clone the repository.
-2. Open Unity Hub.
-3. Add project folder.
-4. Open with Unity 6000.3.9f1.
-5. Let Unity reimport.
-6. Open scene [Assets/Scenes/MainMenu.unity](Assets/Scenes/MainMenu.unity).
-7. Press Play.
+### Setup
+
+1. Clone this repository:
+2. Open the project in Unity.
+3. Ensure all dependencies (like TextMeshPro) are installed via the Unity Package Manager.
+4. Open the main scene and press Play.
 
 ## Controls
 
-- W / Up Arrow: accelerate
-- S / Down Arrow: reverse/brake
-- A / Left Arrow: steer left
-- D / Right Arrow: steer right
-- Space: brake
+- **Arrow Keys / WASD**: Steer and accelerate/brake the car
+- **Spacebar**: Apply brakes
 
-## Build A Playable Game (For Players Without Unity)
+## Contributing
 
-1. Open File -> Build Profiles in Unity.
-2. Select target platform (Windows/Mac/Linux).
-3. Ensure scenes are included in this order:
-   - Assets/Scenes/MainMenu.unity
-   - Assets/Scenes/Garage.unity
-   - Assets/Scenes/SampleScene.unity
-4. Click Build and choose an output folder (for example: Builds/Windows).
-5. Zip the build folder and upload it to GitHub Releases.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-After that, players can download the release zip and run the game directly without Unity.
 
-## Quick Git Push Checklist
 
-1. Check status:
-   - git status
-2. Stage all project source files:
-   - git add Assets Packages ProjectSettings README.md .gitignore
-3. Commit:
-   - git commit -m "Prepare full Unity project for sharing"
-4. Push:
-   - git push origin <your-branch>
+---
+
+*This project is for educational and entertainment purposes.*
